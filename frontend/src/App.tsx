@@ -4,6 +4,7 @@ import SubjectCard from './components/SubjectCard'
 import { pokeAPI } from './services/pokeapi';
 import { NameCard } from './components/NameCard';
 import LoginForm from './components/LoginForm';
+import { Calculator } from './components/Calculator';
 
 function  App() {
   const [pokemon, setPokemon] = useState(null);
@@ -11,7 +12,6 @@ function  App() {
   useEffect(() => {
     pokeAPI.get('/pokemon/charmander',{})
       .then(response => {
-        debugger
         setPokemon(response.data);
       })
       .catch(error => {
@@ -21,7 +21,7 @@ function  App() {
   
   return (
     <>
-      <LoginForm/>
+      <Calculator />
     </>
   )
 }
