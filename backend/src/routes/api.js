@@ -8,6 +8,9 @@ const { checkAuth } = require("../middlewares/auth");
  * /user:
  *   get:
  *     summary: Obtener una lista de usuarios
+ *     parameters:
+ *        - in: query
+ *          name: auth
  *     responses:
  *       200:
  *         description: Lista de usuarios obtenida exitosamente
