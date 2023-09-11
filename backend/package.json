@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha src/test/**/*.test.js --exit",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "migrate-create": "knex --knexfile ./src/config/knex-mysql.js migrate:make"
   },
   "author": "UPB",
@@ -23,6 +23,7 @@
     "chai": "^4.3.7",
     "eslint": "^8.47.0",
     "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
     "sinon": "^15.2.0"
   }
 }

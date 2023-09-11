@@ -4,6 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./src/config/swagger.js');
 
 const routes = require("./src/routes/api");
+const subjectRoutes = require("./src/routes/subject.js");
 
 // Crear servidor
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Creando API
 app.use("/api", routes);
+app.use("/api/subjects", subjectRoutes);
 
 // Ruta Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
