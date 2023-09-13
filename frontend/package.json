@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest",
-    "e2e": "cypress open"
+    "cypress": "cypress open",
+    "e2e": "cypress run"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -18,6 +19,7 @@
     "@mui/material": "^5.14.6",
     "axios": "^1.5.0",
     "jest-environment-jsdom": "^29.6.4",
+    "mathjs": "^11.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

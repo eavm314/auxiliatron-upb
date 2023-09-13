@@ -5,6 +5,7 @@ import { pokeAPI } from './services/pokeapi';
 import { NameCard } from './components/NameCard';
 import LoginForm from './components/LoginForm';
 import { Calculator } from './components/Calculator';
+import { SuperCalculator } from './components/SuperCalculator';
 
 function  App() {
   const [pokemon, setPokemon] = useState(null);
@@ -20,9 +21,9 @@ function  App() {
   }, []);
   
   return (
-    <>
-      <Calculator />
-    </>
+    <div className='flex justify-center mt-20'>
+      <SuperCalculator />
+    </div>
   )
 }
 
