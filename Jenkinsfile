@@ -6,14 +6,16 @@ pipeline {
     }
     
     stages {
-        stage('Build') {
+        stage('Dependencias') {
             steps {
-                sh 'cd frontend && npm install && npm run build'
+                echo 'Descargando dependencias...'
+                sh 'cd frontend && npm install'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing...'
+                sh 'cd frontend && npm run test'
             }
         }
         stage('Deploy') {
