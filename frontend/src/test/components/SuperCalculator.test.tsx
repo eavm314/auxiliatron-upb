@@ -1,72 +1,35 @@
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { SuperCalculator } from '../../components/SuperCalculator';
 
-test("Se deben sumar dos números positivos y mostrar el resultado", () => {
-    const { getByPlaceholderText, getByText } = render(<SuperCalculator />);
-    const input1 = getByPlaceholderText('Ingrese el primer número');
-    const input2 = getByPlaceholderText('Ingrese el segundo número');
-    const addButton = getByText('Sumar');
-
-    fireEvent.change(input1, { target: { value: '32' } });
-    fireEvent.change(input2, { target: { value: '9' } });
-    fireEvent.click(addButton);
-
-    const result = getByText('Resultado: 41');
-    expect(result).toBeTruthy();
+test("Se debe verificar que se rendericen los botones con los numeros", () => {
+    render(<SuperCalculator />);
+    
+    const numbers = screen.getAllByText(/\d/)
+    expect(numbers).toHaveLength(10);
 });
 
-test("Se deben sumar dos números negativos y mostrar el resultado", () => {
-    const { getByPlaceholderText, getByText } = render(<SuperCalculator />);
-    const input1 = getByPlaceholderText('Ingrese el primer número');
-    const input2 = getByPlaceholderText('Ingrese el segundo número');
-    const addButton = getByText('Sumar');
-
-    fireEvent.change(input1, { target: { value: '-29' } });
-    fireEvent.change(input2, { target: { value: '-63' } });
-    fireEvent.click(addButton);
-
-    const result = getByText('Resultado: -92');
-    expect(result).toBeTruthy();
+test("Se debe verificar que se actualice la pantalla de la calculadora al presionar botones", () => {
+    render(<SuperCalculator />);
+    
+    fireEvent.click(screen.getByText("8"));
+    fireEvent.click(screen.getByText("2"));
+    fireEvent.click(screen.getByText("1"));
+    fireEvent.click(screen.getByText("6"));
+    
+    const result = screen.getByRole("textbox") as HTMLInputElement;
+    expect(result.value).toEqual("8216");
 });
 
-test("Se deben sumar dos números decimales y mostrar el resultado", () => {
-    const { getByPlaceholderText, getByText } = render(<SuperCalculator />);
-    const input1 = getByPlaceholderText('Ingrese el primer número');
-    const input2 = getByPlaceholderText('Ingrese el segundo número');
-    const addButton = getByText('Sumar');
-
-    fireEvent.change(input1, { target: { value: '12.3' } });
-    fireEvent.change(input2, { target: { value: '51.25' } });
-    fireEvent.click(addButton);
-
-    const result = getByText('Resultado: 63.55');
-    expect(result).toBeTruthy();
-});
-
-test("Debe validar que los campos sean numéricos", () => {
-    const { getByPlaceholderText, getByText } = render(<SuperCalculator />);
-    const input1 = getByPlaceholderText('Ingrese el primer número');
-    const input2 = getByPlaceholderText('Ingrese el segundo número');
-    const addButton = getByText('Sumar');
-
-    fireEvent.change(input1, { target: { value: 'abc' } });
-    fireEvent.change(input2, { target: { value: '3' } });
-    fireEvent.click(addButton);
-
-    const result = getByText('Por favor, ingrese números válidos.');
-    expect(result).toBeTruthy();
-});
-
-test("Debe validar que los campos no estén vacios", () => {
-    const { getByPlaceholderText, getByText } = render(<SuperCalculator />);
-    const input1 = getByPlaceholderText('Ingrese el primer número');
-    const input2 = getByPlaceholderText('Ingrese el segundo número');
-    const addButton = getByText('Sumar');
-
-    fireEvent.change(input1, { target: { value: '' } });
-    fireEvent.change(input2, { target: { value: '12' } });
-    fireEvent.click(addButton);
-
-    const result = getByText('Por favor, ingrese números válidos.');
-    expect(result).toBeTruthy();
+test("Se debe verificar que se realice una suma correctamente", () => {
+    render(<SuperCalculator />);
+    
+    fireEvent.click(screen.getByText("4"));
+    fireEvent.click(screen.getByText("2"));
+    fireEvent.click(screen.getByText("+"));
+    fireEvent.click(screen.getByText("3"));
+    fireEvent.click(screen.getByText("1"));
+    fireEvent.click(screen.getByText("="));
+    
+    const result = screen.getByRole("textbox") as HTMLInputElement;
+    expect(result.value).toEqual("=73");
 });

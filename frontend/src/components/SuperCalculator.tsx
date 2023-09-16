@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Button } from "./Button";
 import { evaluateOperation, removeLeadingZeros } from "../helpers/evaluations"
 
 export const SuperCalculator = () => {
-  const [operation, setOperation] = 
-    useState(localStorage.getItem("operation")?
-    localStorage.getItem("operation"):"0");
+  const [operation, setOperation] = useState("0");
 
   const textButtons = ["(", ")", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", ".", "0"];
 
-  const concatSimbol = (e, text) => {
+  const concatSimbol = (e: MouseEvent, text: string) => {
     e.preventDefault();
     if (operation==="Syntax Error" || operation[0]==='='){
       setOperation(removeLeadingZeros(text));
@@ -18,7 +16,7 @@ export const SuperCalculator = () => {
     }
   };
 
-  const deleteSymbol = (e) => {
+  const deleteSymbol = (e: MouseEvent) => {
     e.preventDefault();
     if (operation==="Syntax Error" || operation[0]==='=' || operation.length === 1){
       setOperation("0");
@@ -27,12 +25,12 @@ export const SuperCalculator = () => {
     }
   };
 
-  const clearInput = (e) => {
+  const clearInput = (e: MouseEvent) => {
     e.preventDefault();
     setOperation("0");
   };
 
-  const evaluateResult = (e) => {
+  const evaluateResult = (e: FormEvent) => {
     e.preventDefault();
     if(operation==="Syntax Error" || operation[0]==="="){
       return;
@@ -41,10 +39,6 @@ export const SuperCalculator = () => {
     const result = String(evaluateOperation(operation));
     setOperation((result==="Syntax Error"? "":"=")+result);
   };
-
-  useEffect(() => {
-    localStorage.setItem("operation", operation);
-  },[operation]);
 
   return (
     <div className="max-w-xs w-full mb-5 p-4 pt-8 
