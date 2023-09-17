@@ -18,6 +18,12 @@ pipeline {
                 sh 'cd frontend && npm run test'
             }
         }
+        stage('Start server') {
+            steps {
+                echo 'Starting...'
+                sh 'cd frontend && npm run dev'
+            }
+        }
         stage('e2e') {
             steps {
                 echo 'Testing...'
